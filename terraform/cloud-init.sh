@@ -5,8 +5,9 @@ cd /root
 curl -LsSf https://astral.sh/uv/install.sh | sh
 source /root/.local/bin/env
 
-mkdir alpha-zero-general
-cd alpha-zero-general
+git clone https://github.com/kilianmandon/seven-wonders-rl.git
+cd seven-wonders-rl
+
 uv venv --python 3.10
 source .venv/bin/activate
 
