@@ -1,0 +1,22 @@
+# Python cache
+*.pyc
+__pycache__/
+.DS_Store
+
+# Project-specific temp
+alpha_zero/temp/
+alpha_zero/checkpoints/
+images/
+
+# IDE/project files
+.project
+.pydevproject
+.idea/
+
+# Terraform
+**/.terraform/
+**/.terraform.lock.hcl
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfvars 
+**/*.tfvars.json

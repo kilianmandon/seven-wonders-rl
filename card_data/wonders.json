@@ -1,0 +1,135 @@
+[
+    {
+        "name": "appian_way",
+        "cost_resources": ["papyrus", "clay", "clay", "stone", "stone"],
+        "resources_provided": [],
+        "military_points_provided": 0,
+        "victory_points_provided": 3,
+        "money_provided": 3,
+        "money_opponent_lost": 3,
+        "action": null,
+        "second_turn": true
+    },
+    {
+        "name": "circus_maximus",
+        "cost_resources": ["glass", "wood", "stone", "stone"],
+        "resources_provided": [],
+        "military_points_provided": 1,
+        "victory_points_provided": 3,
+        "money_provided": 0,
+        "money_opponent_lost": 0,
+        "action": "discard_gray",
+        "second_turn": false
+    }, 
+    {
+        "name": "colossus",
+        "cost_resources": ["glass", "clay", "clay", "clay"],
+        "resources_provided": [],
+        "military_points_provided": 2,
+        "victory_points_provided": 3,
+        "money_provided": 0,
+        "money_opponent_lost": 0,
+        "action": null,
+        "second_turn": false
+    },
+    {
+        "name": "great_library",
+        "cost_resources": ["papyrus", "glass", "wood", "wood", "wood"],
+        "resources_provided": [],
+        "military_points_provided": 0,
+        "victory_points_provided": 4,
+        "money_provided": 0,
+        "money_opponent_lost": 0,
+        "action": "random_progress_token",
+        "second_turn": false
+    },
+    {
+        "name": "great_lighthouse",
+        "cost_resources": ["papyrus", "papyrus", "stone", "wood"],
+        "resources_provided": [["wood", "stone", "clay"]],
+        "military_points_provided": 0,
+        "victory_points_provided": 4,
+        "money_provided": 0,
+        "money_opponent_lost": 0,
+        "action": null,
+        "second_turn": false
+    },
+    {
+        "name": "hanging_gardens",
+        "cost_resources": ["papyrus", "glass", "wood", "wood"],
+        "resources_provided": [],
+        "military_points_provided": 0,
+        "victory_points_provided": 3,
+        "money_provided": 6,
+        "money_opponent_lost": 0,
+        "action": null,
+        "second_turn": true
+    },
+    {
+        "name": "mausoleum",
+        "cost_resources": ["papyrus", "glass", "glass", "clay", "clay"],
+        "resources_provided": [],
+        "military_points_provided": 0,
+        "victory_points_provided": 2,
+        "money_provided": 0,
+        "money_opponent_lost": 0,
+        "action": "choose_discarded",
+        "second_turn": false
+    },
+    {
+        "name": "piraeus",
+        "cost_resources": ["clay", "stone", "wood", "wood"],
+        "resources_provided": [["papyrus", "glass"]],
+        "military_points_provided": 0,
+        "victory_points_provided": 2,
+        "money_provided": 0,
+        "money_opponent_lost": 0,
+        "action": null,
+        "second_turn": true
+    },
+    {
+        "name": "pyramids",
+        "cost_resources": ["papyrus", "stone", "stone", "stone"],
+        "resources_provided": [],
+        "military_points_provided": 0,
+        "victory_points_provided": 9,
+        "science_provided": null,
+        "money_provided": 0,
+        "money_opponent_lost": 0,
+        "action": null,
+        "second_turn": false
+    },
+    {
+        "name": "sphinx",
+        "cost_resources": ["glass", "glass", "clay", "stone"],
+        "resources_provided": [],
+        "military_points_provided": 0,
+        "victory_points_provided": 6,
+        "money_provided": 0,
+        "money_opponent_lost": 0,
+        "action": null,
+        "second_turn": true
+    },
+    {
+        "name": "statue_of_zeus",
+        "cost_resources": ["papyrus", "papyrus", "clay", "wood", "stone"],
+        "resources_provided": [],
+        "military_points_provided": 1,
+        "victory_points_provided": 3,
+        "money_provided": 0,
+        "money_opponent_lost": 0,
+        "action": "discard_brown",
+        "second_turn": false
+    },
+    {
+        "name": "temple_of_artemis",
+        "cost_resources": ["papyrus", "glass", "stone", "wood"],
+        "resources_provided": [],
+        "military_points_provided": 0,
+        "victory_points_provided": 0,
+        "money_provided": 12,
+        "money_opponent_lost": 0,
+        "action": null,
+        "second_turn": true
+    }
+]

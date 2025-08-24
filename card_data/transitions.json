@@ -1,0 +1,19 @@
+[
+    ["stable", "horse_breeders"],
+    ["garrison", "barracks"],
+    ["palisade", "fortifications"],
+    ["archery_range", "siege_workshop"],
+    ["parade_ground", "circus"],
+    ["scriptorium", "library"],
+    ["pharmacist", "dispensary"],
+    ["school", "university"],
+    ["laboratory", "observatory"],
+    ["theater", "statue"],
+    ["statue", "gardens"],
+    ["altar", "temple"],
+    ["temple", "pantheon"],
+    ["baths", "aqueduct"],
+    ["rostrum", "senate"],
+    ["tavern", "lighthouse"],
+    ["brewery", "arena"]
+]
