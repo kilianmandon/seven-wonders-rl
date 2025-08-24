@@ -21,7 +21,11 @@ def run_episode(all_args):
     args = all_args['args']
     nnet = all_args['nnet']
     mcts = MCTS(game, nnet, args)
-    examples = executeEpisode(mcts, game, args)
+    try:
+        examples = executeEpisode(mcts, game, args)
+    except Exception:
+        log.error('Error in game execution during training.')
+        examples = []
     return examples
 
 def executeEpisode(mcts, game, args):
@@ -141,7 +145,13 @@ class Coach():
 
             arena = Arena(pmcts,
                           nmcts, self.game)
-            pwins, nwins, draws = arena.playGames(self.args.arenaCompare)
+            try:
+                pwins, nwins, draws = arena.playGames(self.args.arenaCompare)
+            except Exception:
+                log.error('Error in evaluation games.')
+                pwins = 0
+                nwins = 0
+                draws = 0
 
             log.info('NEW/PREV WINS : %d / %d ; DRAWS : %d' % (nwins, pwins, draws))
             if pwins + nwins == 0 or float(nwins) / (pwins + nwins) < self.args.updateThreshold:

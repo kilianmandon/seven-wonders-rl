@@ -1,5 +1,7 @@
 import copy
+from datetime import datetime
 import json
+from pathlib import Path
 import numpy as np
 from alpha_zero.game import Game
 from game import create_action_mask, discard_opponent_card, get_player_and_opponent, pick_additional_progress_token, pick_card, pick_discarded_card, pick_progress_token, start_game
@@ -60,8 +62,23 @@ class Game7WondersWrapper(Game):
         return game_state
 
     def getNextState(self, board, player, action, save=False):
-        lastBoard = copy.deepcopy(board)
-        board = self.handle_action(board, action)
+        try:
+            board = self.handle_action(board, action)
+        except Exception as e:
+            state_data = board.model_dump(mode="json")
+            data = {
+                'states': [state_data],
+                'actions': [action],
+            }
+            now = datetime.now()
+            datetime_str = now.strftime("%Y%m%d_%H%M%S")
+            Path('alpha_zero/logs/error_states').mkdir(exist_ok=True, parents=True)
+            with open(f'alpha_zero/logs/error_states/error_{datetime_str}.json', 'w') as f:
+                json.dump(data, f)
+
+            raise
+
+            
         next_player = 1 if board.active_player == Player.one else -1
 
         if self.store_states and save:

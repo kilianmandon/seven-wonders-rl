@@ -1,9 +1,10 @@
 import logging
+from pathlib import Path
 from torch import nn
 from torch.nn import functional as F
 import random
 
-import coloredlogs
+# import coloredlogs
 import numpy as np
 import torch
 
@@ -18,7 +19,7 @@ from alpha_zero.utils import *
 
 log = logging.getLogger(__name__)
 
-coloredlogs.install(level='INFO')  # Change this to DEBUG to see more info.
+# coloredlogs.install(level='INFO')  # Change this to DEBUG to see more info.
 
 args = dotdict({
     'numIters': 1000,
@@ -38,7 +39,20 @@ args = dotdict({
 })
 
 
+def setup_logging():
+    Path('alpha_zero/logs').mkdir(exist_ok=True)
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+        handlers=[
+            logging.StreamHandler(),
+            logging.FileHandler("alpha_zero/logs/app.log", mode="a"),
+        ],
+    )
+
+
 def training():
+    setup_logging()
     log.info('Loading %s...', Game7WondersWrapper.__name__)
     g = Game7WondersWrapper()
 
@@ -59,6 +73,7 @@ def training():
         c.loadTrainExamples()
 
     log.info('Starting the learning process 🎉')
+    return
     c.learn()
 
 def randomMove(game_state):

@@ -33,14 +33,12 @@ six==1.16.0
 tensorboard==2.9.1
 tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.8.1
-tensorflow==2.9.1
-tensorflow-estimator==2.9.0
-tensorflow-io-gcs-filesystem==0.26.0
 termcolor==1.1.0
-torch
+torch==2.8.0
 tqdm==4.64.0
-typing_extensions==4.2.0
+typing_extensions==4.10.0
 urllib3==1.26.9
 Werkzeug==2.1.2
 wrapt==1.14.1
 zipp==3.8.0
+pydantic
