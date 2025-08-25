@@ -73,7 +73,7 @@ def training():
         c.loadTrainExamples()
 
     log.info('Starting the learning process 🎉')
-    return
+    
     c.learn()
 
 def randomMove(game_state):
@@ -83,38 +83,54 @@ def randomMove(game_state):
 
 
 
-def ppo_actor(game_state, policy_net):
-    player, opponent = get_player_and_opponent(game_state)
-    s_enc = encode_game_state(game_state, player, opponent)
+class PPOActor:
+    def __init__(self):
+        n_obs_dim = 1966
+        n_actions = 386
+        c_h = 256
 
-    mask = torch.tensor(create_action_mask(game_state)).bool()
+        self.policy_net = nn.Sequential(
+            nn.Linear(n_obs_dim, c_h),
+            nn.ReLU(),
+            nn.Linear(c_h, c_h),
+            nn.ReLU(),
+            nn.Linear(c_h, n_actions),
+        )
 
-    
-    with torch.no_grad():
-        logits = policy_net(s_enc)
-        logits[~mask] = -1e6
-        probs = F.softmax(logits, dim=-1).numpy()
+        self.policy_net.load_state_dict(torch.load('checkpoints/actor.pt'))
 
-    return np.random.choice(np.arange(probs.size), p=probs)
+    def __call__(self, game_state):
+        player, opponent = get_player_and_opponent(game_state)
+        s_enc = encode_game_state(game_state, player, opponent)
+
+        mask = torch.tensor(create_action_mask(game_state)).bool()
+
+        with torch.no_grad():
+            logits = self.policy_net(s_enc)
+            logits[~mask] = -1e6
+            probs = F.softmax(logits, dim=-1).numpy()
+
+        return np.random.choice(np.arange(probs.size), p=probs)
 
 def eval_against_random():
-    g = Game7WondersWrapper(store_states=True)
-    pnet = NeuralNet7Wonders(g)
-    pnet.load_checkpoint('temp', 'checkpoint_1.pth.tar')
+    g = Game7WondersWrapper(store_states=False)
+    # pnet = NeuralNet7Wonders(g)
+    # pnet.load_checkpoint('temp', 'checkpoint_1.pth.tar')
     nnet = NeuralNet7Wonders(g)
-    nnet.load_checkpoint('temp', 'checkpoint_15.pth.tar')
+    nnet.load_checkpoint('alpha_zero/temp', 'checkpoint_13.pth.tar')
 
     mcts = MCTS(g, nnet, args)
-    pmcts = MCTS(g, pnet, args)
+    # pmcts = MCTS(g, pnet, args)
 
-    arena = Arena(mcts, ppo_actor, g)
-    # p1, p2, draw = arena.playGames(40)
+    arena = Arena(mcts, PPOActor(), g)
+    p1, p2, draw = arena.playGames(200)
+    print(f'{p1} | {p2} | {draw} (W|L|D)')
+    g.store_states = True
     res = arena.playGame()
     print(res)
-    g.store_trajectory(1)
-    # print(f'{p1} | {p2} | {draw} (W|L|D)')
+    g.store_trajectory(0)
 
     
 
 if __name__ == "__main__":
-    training()
+    eval_against_random()

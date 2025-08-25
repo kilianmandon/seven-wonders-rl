@@ -6,6 +6,9 @@ __pycache__/
 # Project-specific temp
 alpha_zero/temp/
 alpha_zero/checkpoints/
+alpha_zero/logs
+checkpoints/
+replays/
 images/
 
 # IDE/project files

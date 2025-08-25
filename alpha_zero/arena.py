@@ -1,6 +1,7 @@
 import logging
 import numpy as np
 from torch.multiprocessing import Pool
+from game_types import VictoryType
 
 from tqdm import tqdm
 
@@ -55,7 +56,7 @@ def playGame(args):
         if hasattr(player, "endGame"):
             player.endGame()
 
-    return curPlayer * game.getGameEnded(board, curPlayer)
+    return curPlayer * game.getGameEnded(board, curPlayer), board.terminal_state.victory_type
 
 class Arena():
     """
@@ -151,6 +152,10 @@ class Arena():
         oneWon = 0
         twoWon = 0
         draws = 0
+        civil_victory = 0
+        military_victory = 0
+        science_victory = 0
+
         with Pool() as executor:
             results = list(tqdm(
                 executor.imap_unordered(playGame, [(self.player1, self.player2, self.game)]*num),
@@ -158,7 +163,16 @@ class Arena():
                 desc="Arena.playGames (1)"
             ))
 
-        for gameResult in results:
+        
+
+        for gameResult, vType in results:
+            match vType:
+                case VictoryType.civilian:
+                    civil_victory += 1
+                case VictoryType.military:
+                    military_victory += 1
+                case VictoryType.science:
+                    science_victory += 1
             if gameResult == 1:
                 oneWon += 1
             elif gameResult == -1:
@@ -175,7 +189,14 @@ class Arena():
                 desc="Arena.playGames (2)"
             ))
 
-        for gameResult in results:
+        for gameResult, vType in results:
+            match vType:
+                case VictoryType.civilian:
+                    civil_victory += 1
+                case VictoryType.military:
+                    military_victory += 1
+                case VictoryType.science:
+                    science_victory += 1
             if gameResult == -1:
                 oneWon += 1
             elif gameResult == 1:
@@ -183,4 +204,5 @@ class Arena():
             else:
                 draws += 1
 
+        print(f'Victory Type C|M|S: {civil_victory} | {military_victory} | {science_victory}')
         return oneWon, twoWon, draws
